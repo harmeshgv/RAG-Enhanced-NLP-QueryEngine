@@ -8,12 +8,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latet
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up python 3.9
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
@@ -31,4 +31,7 @@ jobs:
 
       - name: Run pytest
         run: |
-          python -m pytest dev/tests/ -v
+          python -m pytest dev/tests/ -v --cov=dev --cov-report=xml
+
+      - name: Upload coverage to Codecov # Optional but recommended
+        uses: codecov/codecov-action@v3
